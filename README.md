@@ -36,3 +36,18 @@ Build version 12E507
 $ xcpretty --version
 0.3.0
 ```
+
+## Build
+
+```sh
+git clone https://github.com/Lessica/BuildVNCServer.git
+cd BuildVNCServer
+chmod +x build.sh
+./build.sh
+```
+
+## Clean
+
+```sh
+git clean -fdx
+```
