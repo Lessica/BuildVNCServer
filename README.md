@@ -2,7 +2,7 @@
 
 macOS cross-compiled `libvncserver` **static library** for iOS **arm64** platform.
 
-*This build fixes CMake endian tests on iOS sdks, if you met `Protocol error: bad desktop size`* in `VNC Viewer`, this patch may help.
+*This build fixes CMake endian tests on iOS sdks, if you met `Protocol error: bad desktop size` in `VNC Viewer`, this patch may help.*
 
 ## Components
 
