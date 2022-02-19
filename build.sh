@@ -84,6 +84,8 @@ cp -r BuildLZO/output/include/* dist/include
 cp BuildPNG/output/lib/libpng16.a dist/lib/libpng16.a
 cp BuildPNG/output/lib/libpng16.a dist/lib/libpng.a
 cp -r BuildPNG/output/include/* dist/include
+cp BuildSASL/output/lib/libsasl2.a dist/lib/libsasl2.a
+cp -r BuildSASL/output/include/* dist/include
 cp output/lib/libvncserver.a dist/lib/libvncserver.a
 cp output/lib/libvncclient.a dist/lib/libvncclient.a
 cp -r output/include/* dist/include
