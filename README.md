@@ -13,6 +13,7 @@ Base SDK: `iPhoneOS13.0.sdk`
 - `libpng`: [libpng-1.6.37](http://www.libpng.org/pub/png/libpng.html)
 - `lzo`: [lzo-2.10](https://www.oberhumer.com/opensource/lzo/)
 - `openssl`: [Build-OpenSSL-cURL](https://github.com/jasonacox/Build-OpenSSL-cURL)
+- `libsasl2`: [cyrus-sasl](https://github.com/cyrusimap/cyrus-sasl)
 
 ## Build Environments
 
