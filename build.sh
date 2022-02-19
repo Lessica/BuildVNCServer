@@ -2,19 +2,19 @@
 
 set -ex
 
-# git clone https://github.com/jasonacox/Build-OpenSSL-cURL.git
-# cd Build-OpenSSL-cURL
-# ./build.sh
-# cd ..
-# cd BuildJPEG
-# ./build.sh
-# cd ..
-# cd BuildLZO
-# ./build.sh
-# cd ..
-# cd BuildPNG
-# ./build.sh
-# cd ..
+git clone https://github.com/jasonacox/Build-OpenSSL-cURL.git
+cd Build-OpenSSL-cURL
+./build.sh
+cd ..
+cd BuildJPEG
+./build.sh
+cd ..
+cd BuildLZO
+./build.sh
+cd ..
+cd BuildPNG
+./build.sh
+cd ..
 
 git clone https://github.com/LibVNC/libvncserver.git
 WORKDING_DIR="$(dirname "$0")/libvncserver"
