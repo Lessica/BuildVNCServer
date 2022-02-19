@@ -1,0 +1,16 @@
+diff -Naru ../libvncserver/CMakeLists.txt ./CMakeLists.txt
+--- ../libvncserver/CMakeLists.txt	2022-02-18 19:56:56.000000000 +0800
++++ ./CMakeLists.txt	2022-02-18 19:57:35.000000000 +0800
+@@ -712,9 +712,9 @@
+ 	if("${LIB}" MATCHES ".*NOTFOUND.*")
+ 	    continue()
+ 	endif()
+-	string(REGEX REPLACE "^.*/lib" "" LIB ${LIB}) # remove leading path and "lib" name prefix
+-	string(REGEX REPLACE "-l" "" LIB ${LIB}) # remove leading -l
+-	string(REGEX REPLACE "\\.so$" "" LIB ${LIB}) # remove trailing .so
++	string(REGEX REPLACE "^.*/lib" "" LIB "${LIB}") # remove leading path and "lib" name prefix
++	string(REGEX REPLACE "-l" "" LIB "${LIB}") # remove leading -l
++	string(REGEX REPLACE "\\.so$" "" LIB "${LIB}") # remove trailing .so
+ 	list(APPEND RESULT "-l${LIB}")
+     endforeach()
+     list(REMOVE_DUPLICATES RESULT)
