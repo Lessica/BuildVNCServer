@@ -15,6 +15,9 @@ cd ..
 cd BuildPNG
 ./build.sh
 cd ..
+cd BuildSASL
+./build.sh
+cd ..
 
 git clone https://github.com/LibVNC/libvncserver.git
 WORKDING_DIR="$(dirname "$0")/libvncserver"
@@ -45,7 +48,9 @@ cmake -G Xcode -B build \
     -DOPENSSL_LIBRARIES=$(realpath ../Build-OpenSSL-cURL/openssl/iOS/lib) \
     -DOPENSSL_CRYPTO_LIBRARY=$(realpath ../Build-OpenSSL-cURL/openssl/iOS/lib/libcrypto.a) \
     -DOPENSSL_SSL_LIBRARY==$(realpath ../Build-OpenSSL-cURL/openssl/iOS/lib/libssl.a) \
-    -DOPENSSL_INCLUDE_DIR=$(realpath ../Build-OpenSSL-cURL/openssl/iOS/include)
+    -DOPENSSL_INCLUDE_DIR=$(realpath ../Build-OpenSSL-cURL/openssl/iOS/include) \
+    -DLIBSASL2_LIBRARIES=$(realpath ../BuildSASL/output/lib) \
+    -DSASL2_INCLUDE_DIR=$(realpath ../BuildSASL/output/include)
 
 cd build
 patch -s -p0 < ../../libvncserver-build.patch
