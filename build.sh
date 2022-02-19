@@ -2,19 +2,19 @@
 
 set -ex
 
-git clone https://github.com/jasonacox/Build-OpenSSL-cURL.git
-cd Build-OpenSSL-cURL
-./build.sh
-cd ..
-cd BuildJPEG
-./build.sh
-cd ..
-cd BuildLZO
-./build.sh
-cd ..
-cd BuildPNG
-./build.sh
-cd ..
+# git clone https://github.com/jasonacox/Build-OpenSSL-cURL.git
+# cd Build-OpenSSL-cURL
+# ./build.sh
+# cd ..
+# cd BuildJPEG
+# ./build.sh
+# cd ..
+# cd BuildLZO
+# ./build.sh
+# cd ..
+# cd BuildPNG
+# ./build.sh
+# cd ..
 
 git clone https://github.com/LibVNC/libvncserver.git
 WORKDING_DIR="$(dirname "$0")/libvncserver"
@@ -47,6 +47,10 @@ cmake -G Xcode -B build \
     -DOPENSSL_SSL_LIBRARY==$(realpath ../Build-OpenSSL-cURL/openssl/iOS/lib/libssl.a) \
     -DOPENSSL_INCLUDE_DIR=$(realpath ../Build-OpenSSL-cURL/openssl/iOS/include)
 
+cd build
+patch -s -p0 < ../../libvncserver-build.patch
+cd ..
+
 xcodebuild clean build \
     -project build/libvncserver.xcodeproj \
     -scheme ALL_BUILD \
@@ -66,6 +70,7 @@ mkdir dist/lib
 mkdir dist/include
 lipo -thin arm64 Build-OpenSSL-cURL/openssl/iOS/lib/libcrypto.a -output dist/lib/libcrypto.a
 lipo -thin arm64 Build-OpenSSL-cURL/openssl/iOS/lib/libssl.a -output dist/lib/libssl.a
+cp -r Build-OpenSSL-cURL/openssl/iOS/include/* dist/include
 cp BuildJPEG/output/lib/libjpeg.a dist/lib/libjpeg.a
 cp BuildJPEG/output/lib/libturbojpeg.a dist/lib/libturbojpeg.a
 cp -r BuildJPEG/output/include/* dist/include

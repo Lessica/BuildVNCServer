@@ -1,0 +1,12 @@
+diff -Naru ../../libvncserver/build/rfb/rfbconfig.h ./rfb/rfbconfig.h
+--- ../../libvncserver/build/rfb/rfbconfig.h	2022-02-19 17:29:58.000000000 +0800
++++ ./rfb/rfbconfig.h	2022-02-19 17:31:30.000000000 +0800
+@@ -13,7 +13,7 @@
+ #define LIBVNCSERVER_HAVE_DIRENT_H 1
+ 
+ /* Define to 1 if you have the <endian.h> header file. */
+-#define LIBVNCSERVER_HAVE_ENDIAN_H 1
++// #define LIBVNCSERVER_HAVE_ENDIAN_H 1
+ 
+ /* Define to 1 if you have the <fcntl.h> header file. */
+ #define LIBVNCSERVER_HAVE_FCNTL_H  1 
