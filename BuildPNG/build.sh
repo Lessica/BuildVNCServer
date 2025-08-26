@@ -3,7 +3,7 @@
 set -ex
 
 # rm -rf libpng-1.6.37
-# rm libpng-1.6.37.tar.gz
+# rm -f libpng-1.6.37.tar.gz
 # wget https://udomain.dl.sourceforge.net/project/libpng/libpng16/1.6.37/libpng-1.6.37.tar.gz
 # tar xvf libpng-1.6.37.tar.gz libpng-1.6.37
 # WORKING_DIR="$(dirname "$0")/libpng-1.6.37"

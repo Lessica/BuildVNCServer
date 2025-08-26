@@ -3,7 +3,7 @@
 set -ex
 
 rm -rf lzo-2.10
-rm lzo-2.10.tar.gz
+rm -f lzo-2.10.tar.gz
 wget https://www.oberhumer.com/opensource/lzo/download/lzo-2.10.tar.gz
 tar xvf lzo-2.10.tar.gz lzo-2.10
 WORKING_DIR="$(dirname "$0")/lzo-2.10"
