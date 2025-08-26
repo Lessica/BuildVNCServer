@@ -1,60 +1,68 @@
-#!/bin/zsh
+#!/bin/bash
 
 set -ex
 
-git clone https://github.com/jasonacox/Build-OpenSSL-cURL.git
+rm -rf Build-OpenSSL-cURL
+mkdir output
+git clone --depth=1 https://github.com/XXTouchNG/Build-OpenSSL-cURL.git
 cd Build-OpenSSL-cURL
 ./build.sh
-cd ..
+cd -
 cd BuildJPEG
 ./build.sh
-cd ..
+cd -
 cd BuildLZO
 ./build.sh
-cd ..
+cd -
 cd BuildPNG
 ./build.sh
-cd ..
+cd -
 cd BuildSASL
 ./build.sh
-cd ..
+cd -
 
-git clone https://github.com/LibVNC/libvncserver.git
-WORKDING_DIR="$(dirname "$0")/libvncserver"
+rm -rf libvncserver
+git clone --depth=1 https://github.com/LibVNC/libvncserver.git
+WORKING_DIR="$(dirname "$0")/libvncserver"
 
-if [ ! -d "$WORKDING_DIR" ]; then
-    mkdir -p "$WORKDING_DIR"
+if [ ! -d "$WORKING_DIR" ]; then
+    mkdir -p "$WORKING_DIR"
 fi
 
-cd "$WORKDING_DIR"
-WORKDING_DIR=$(pwd)
+cd "$WORKING_DIR"
+WORKING_DIR=$(pwd)
 patch -s -p0 < ../libvncserver.patch
 
 git clean -fdx
 
 cmake -G Xcode -B build \
     -DBUILD_SHARED_LIBS=OFF \
-    -DCMAKE_INSTALL_PREFIX=${WORKDING_DIR}/../output \
+    -DCMAKE_INSTALL_PREFIX="${WORKING_DIR}/../output" \
     -DCMAKE_SYSTEM_NAME=iOS \
-    -DCMAKE_OSX_DEPLOYMENT_TARGET=13.0 \
+    -DCMAKE_OSX_DEPLOYMENT_TARGET=14.0 \
     -DWITH_EXAMPLES=OFF \
-    -DWITH_TESTS=PFF \
-    -DLZO_LIBRARIES=$(realpath ../BuildLZO/output/lib) \
-    -DLZO_INCLUDE_DIR=$(realpath ../BuildLZO/output/include) \
-    -DJPEG_LIBRARY=$(realpath ../BuildJPEG/output/lib/libturbojpeg.a) \
-    -DJPEG_INCLUDE_DIR=$(realpath ../BuildJPEG/output/include) \
-    -DPNG_LIBRARY=$(realpath ../BuildPNG/output/lib/libpng16.a) \
-    -DPNG_PNG_INCLUDE_DIR=$(realpath ../BuildPNG/output/include) \
-    -DOPENSSL_LIBRARIES=$(realpath ../Build-OpenSSL-cURL/openssl/iOS/lib) \
-    -DOPENSSL_CRYPTO_LIBRARY=$(realpath ../Build-OpenSSL-cURL/openssl/iOS/lib/libcrypto.a) \
-    -DOPENSSL_SSL_LIBRARY==$(realpath ../Build-OpenSSL-cURL/openssl/iOS/lib/libssl.a) \
-    -DOPENSSL_INCLUDE_DIR=$(realpath ../Build-OpenSSL-cURL/openssl/iOS/include) \
-    -DLIBSASL2_LIBRARIES=$(realpath ../BuildSASL/output/lib) \
-    -DSASL2_INCLUDE_DIR=$(realpath ../BuildSASL/output/include)
+    -DWITH_TESTS=OFF \
+    -DWITH_SDL=OFF \
+    -DWITH_GTK=OFF \
+    -DWITH_GNUTLS=OFF \
+    -DWITH_SYSTEMD=OFF \
+    -DWITH_FFMPEG=OFF \
+    -DLZO_LIBRARIES="$(realpath ../BuildLZO/output/lib/liblzo2.a)" \
+    -DLZO_INCLUDE_DIR="$(realpath ../BuildLZO/output/include)" \
+    -DJPEG_LIBRARY="$(realpath ../BuildJPEG/output/lib/libturbojpeg.a)" \
+    -DJPEG_INCLUDE_DIR="$(realpath ../BuildJPEG/output/include)" \
+    -DPNG_LIBRARY="$(realpath ../BuildPNG/output/lib/libpng16.a)" \
+    -DPNG_PNG_INCLUDE_DIR="$(realpath ../BuildPNG/output/include)" \
+    -DOPENSSL_LIBRARIES="$(realpath ../Build-OpenSSL-cURL/openssl/iOS/lib)" \
+    -DOPENSSL_CRYPTO_LIBRARY="$(realpath ../Build-OpenSSL-cURL/openssl/iOS/lib/libcrypto.a)" \
+    -DOPENSSL_SSL_LIBRARY="$(realpath ../Build-OpenSSL-cURL/openssl/iOS/lib/libssl.a)" \
+    -DOPENSSL_INCLUDE_DIR="$(realpath ../Build-OpenSSL-cURL/openssl/iOS/include)" \
+    -DLIBSASL2_LIBRARIES="$(realpath ../BuildSASL/output/lib/libsasl2.a)" \
+    -DSASL2_INCLUDE_DIR="$(realpath ../BuildSASL/output/include)"
 
 cd build
-patch -s -p0 < ../../libvncserver-build.patch
-cd ..
+patch include/rfb/rfbconfig.h -s -p0 < ../../libvncserver-build.patch
+cd -
 
 xcodebuild clean build \
     -project build/libvncserver.xcodeproj \
@@ -67,9 +75,10 @@ xcodebuild clean build \
 
 cd build
 ln -s Release-iphoneos Release
-cmake -P cmake_install.cmake
+cmake -DCMAKE_INSTALL_PREFIX="$(realpath ../../output)" \
+    -P cmake_install.cmake
 
-cd "$WORKDING_DIR/.."
+cd "$WORKING_DIR/.."
 mkdir dist
 mkdir dist/lib
 mkdir dist/include

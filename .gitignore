@@ -4,6 +4,7 @@ BuildJPEG/output/
 BuildLZO/lzo-2.10/
 BuildLZO/lzo-2.10.tar.gz
 BuildLZO/output/
+BuildPNG/libpng/
 BuildPNG/libpng-1.6.37/
 BuildPNG/libpng-1.6.37.tar.gz
 BuildPNG/output/

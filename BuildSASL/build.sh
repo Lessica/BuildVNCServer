@@ -2,23 +2,27 @@
 
 set -ex
 
-git clone https://github.com/cyrusimap/cyrus-sasl.git
-WORKDING_DIR="$(dirname "$0")/cyrus-sasl"
+rm -rf cyrus-sasl
+mkdir -p output
+git clone --depth=1 https://github.com/cyrusimap/cyrus-sasl.git
+WORKING_DIR="$(dirname "$0")/cyrus-sasl"
 
-if [ ! -d "$WORKDING_DIR" ]; then
-    mkdir -p "$WORKDING_DIR"
+if [ ! -d "$WORKING_DIR" ]; then
+    mkdir -p "$WORKING_DIR"
 fi
 
-cd "$WORKDING_DIR"
-WORKDING_DIR=$(pwd)
+cd "$WORKING_DIR"
+WORKING_DIR=$(pwd)
 
 git clean -fdx
 
+XCODE_DIR=$(xcode-select -p)
 OUTPUT_PATH=$(realpath ../output)
-export CFLAGS="-Wall -arch arm64 -miphoneos-version-min=13.0 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk"
+export CFLAGS="-Wall -arch arm64 -miphoneos-version-min=14.0 -isysroot ${XCODE_DIR}/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk"
 ./autogen.sh --prefix="$OUTPUT_PATH" \
+    --with-openssl="$(realpath ../../Build-OpenSSL-cURL/openssl/iOS)" \
     --host=aarch64-apple-darwin --with-staticsasl
-make install DESTDIR=$(realpath ../output)
+make install DESTDIR="$(realpath ../output)" || true
 cd ..
 
-mv output/**/cyrus-sasl/build/* output
+mv output/**/BuildSASL/output/* output
