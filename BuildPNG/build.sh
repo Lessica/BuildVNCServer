@@ -9,7 +9,7 @@ set -ex
 # WORKING_DIR="$(dirname "$0")/libpng-1.6.37"
 
 rm -rf libpng
-git clone --depth 1 https://github.com/pnggroup/libpng.git
+git clone --depth 1 https://github.com/pnggroup/libpng.git # 134ab615b617f548e822d8857f1cfc0525aefeba
 WORKING_DIR="$(dirname "$0")/libpng"
 
 # check if working dir is all right

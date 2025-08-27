@@ -3,7 +3,7 @@
 set -ex
 
 rm -rf libjpeg-turbo
-git clone --depth=1 https://github.com/libjpeg-turbo/libjpeg-turbo.git
+git clone --depth=1 https://github.com/libjpeg-turbo/libjpeg-turbo.git # 4e151a4ad91001b3aa8c2ece2205c15f487ce320
 WORKING_DIR="$(dirname "$0")/libjpeg-turbo"
 
 # check if working dir is all right

@@ -4,7 +4,7 @@ set -ex
 
 rm -rf cyrus-sasl
 mkdir -p output
-git clone --depth=1 https://github.com/cyrusimap/cyrus-sasl.git
+git clone --depth=1 https://github.com/cyrusimap/cyrus-sasl.git # ac0c278817a082c625c496ec812318c019e0b96f
 WORKING_DIR="$(dirname "$0")/cyrus-sasl"
 
 if [ ! -d "$WORKING_DIR" ]; then

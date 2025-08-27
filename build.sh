@@ -5,7 +5,7 @@ set -ex
 mkdir -p output
 if [ -z "$SIMULATOR" ]; then
     rm -rf Build-OpenSSL-cURL
-    git clone --depth=1 https://github.com/XXTouchNG/Build-OpenSSL-cURL.git
+    git clone --depth=1 https://github.com/XXTouchNG/Build-OpenSSL-cURL.git # 7d215cdeb77a0b8ce56e9f07d487e869aec13f08
     cd Build-OpenSSL-cURL
     ./build.sh
     cd -
@@ -24,7 +24,7 @@ if [ -z "$SIMULATOR" ]; then
 fi
 
 rm -rf libvncserver
-git clone --depth=1 https://github.com/LibVNC/libvncserver.git
+git clone --depth=1 https://github.com/LibVNC/libvncserver.git # 041ea576c3dddd6c7169935aaf8889673024fbfc
 WORKING_DIR="$(dirname "$0")/libvncserver"
 
 if [ ! -d "$WORKING_DIR" ]; then
