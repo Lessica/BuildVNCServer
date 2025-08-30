@@ -27,7 +27,8 @@ cmake -G Xcode -B build \
     -DCMAKE_SYSTEM_NAME=iOS \
     -DCMAKE_SYSTEM_PROCESSOR=aarch64 \
     -DCMAKE_OSX_DEPLOYMENT_TARGET=14.0 \
-    -DCMAKE_OSX_SYSROOT="${IOS_SYSROOT}"
+    -DCMAKE_OSX_SYSROOT="${IOS_SYSROOT}" \
+    -DCMAKE_POLICY_VERSION_MINIMUM=3.5
 
 xcodebuild build \
     -project build/lzo.xcodeproj \
